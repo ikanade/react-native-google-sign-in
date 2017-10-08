@@ -44,7 +44,7 @@ const GoogleSignIn = {
   },
 
   hasPlayServices(params = { autoResolve: true }) {
-    return RNGoogleSignin.playServicesAvailable(params.autoResolve);
+    return RNGoogleSignIn.playServicesAvailable(params.autoResolve);
   },
 
   signInPromise() {
