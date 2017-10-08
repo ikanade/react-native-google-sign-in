@@ -29,16 +29,28 @@ export default class ExampleApp extends Component {
           Shake or press menu button for dev menu
         </Text>
         <TouchableHighlight onPress={async () => {
-          await GoogleSignIn.configure({
-            clientID: '387614752364-757n5irliuapbfejtt5publdermgu1hr.apps.googleusercontent.com',
-            scopes: ['openid', 'email', 'profile'],
-            shouldFetchBasicProfile: true,
+          GoogleSignIn.hasPlayServices({autoResolve: true}).then((succ)=>{
+            console.log("Play services available",succ);
+          }).catch((err)=>{
+            console.log(err);
           });
 
-          const user = await GoogleSignIn.signInPromise();
-          setTimeout(() => {
-            alert(JSON.stringify(user, null, '  '));
-          }, 1500);
+          await GoogleSignIn.configure({
+            serverClientID: '737956827869-k8q0nnllvqueiuikjpf2rcg2aver7rho.apps.googleusercontent.com',
+            scopes: ['openid', 'email', 'profile'],
+            shouldFetchBasicProfile: true,
+            offlineAccess: true
+          }).then(function(response) {
+            console.log(response);
+          }).catch(function(error){
+            console.log(error);
+          });
+
+          GoogleSignIn.signInPromise().then((result)=>{
+            console.log("some result from sign in",result);
+          }).catch((err)=>{
+            console.log("something went wrong with sing in",err);
+          });
         }}>
           <Text style={styles.instructions}>
             Google Sign-In

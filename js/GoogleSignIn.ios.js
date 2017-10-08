@@ -30,6 +30,10 @@ const GoogleSignIn = {
     RNGoogleSignIn.signIn();
   },
 
+  hasPlayServices(params = { autoResolve: true }) {
+    return Promise.resolve(true);
+  },
+
   async signInPromise() {
     const user = await RNGoogleSignIn.currentUser();
     if (user) return GoogleSignIn.normalizeUser(user);

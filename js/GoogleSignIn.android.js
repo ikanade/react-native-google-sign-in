@@ -43,6 +43,10 @@ const GoogleSignIn = {
     RNGoogleSignIn.signIn();
   },
 
+  hasPlayServices(params = { autoResolve: true }) {
+    return RNGoogleSignin.playServicesAvailable(params.autoResolve);
+  },
+
   signInPromise() {
     return new Promise((resolve, reject) => {
       const offSuccess = GoogleSignIn.onSignIn((data) => {
